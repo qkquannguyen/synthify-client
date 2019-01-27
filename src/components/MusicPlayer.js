@@ -62,7 +62,7 @@ function MediaControlCard(props) {
           <IconButton aria-label="Previous">
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
-          <IconButton aria-label="Play/pause" onClick={props.toggleAudio} iconStyle={styles.buttonSize}>
+          <IconButton aria-label="Play/pause" onClick={props.toggleAudio}>
             {props.audioState === false ? <PlayArrowIcon className={classes.playPauseIcon} /> : <PauseIcon className={classes.playPauseIcon} />}
           </IconButton>
           <IconButton aria-label="Next">

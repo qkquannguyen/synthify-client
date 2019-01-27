@@ -6,9 +6,7 @@ class HomePage extends Component {
 
   constructor(props) {
     super(props);
-
-    this.toggleAudio = this.toggleAudio.bind(this);
-
+    
     this.state = {
       play: false
     };

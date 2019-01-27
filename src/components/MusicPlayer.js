@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from '@material-ui/core/Grid';
 
@@ -36,7 +37,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
   },
-  playIcon: {
+  playPauseIcon: {
     height: 38,
     width: 38,
   },
@@ -61,8 +62,8 @@ function MediaControlCard(props) {
           <IconButton aria-label="Previous">
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
-          <IconButton aria-label="Play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
+          <IconButton aria-label="Play/pause" onClick={props.toggleAudio} iconStyle={styles.buttonSize}>
+            {props.audioState === false ? <PlayArrowIcon className={classes.playPauseIcon} /> : <PauseIcon className={classes.playPauseIcon} />}
           </IconButton>
           <IconButton aria-label="Next">
             {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}

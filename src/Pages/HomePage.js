@@ -19,7 +19,7 @@ class HomePage extends Component {
       <div>
         <AppBar />
         <PlaylistDrawer
-        toggleAudio={this.toggleAudio.bind(this)}
+        toggleAudio={this.toggleAudio}
         audioState={this.state.play} />
       </div>
     );

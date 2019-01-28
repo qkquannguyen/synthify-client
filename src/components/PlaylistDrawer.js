@@ -77,7 +77,9 @@ function PermanentDrawerLeft(props) {
 						</List>
 					</Grid>
 					
-					<MusicPlayer/>
+					<MusicPlayer
+          toggleAudio={props.toggleAudio}
+          audioState={props.audioState} />
 
       </main>
     </div>

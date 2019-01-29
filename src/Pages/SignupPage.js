@@ -41,8 +41,7 @@ class SignUp extends Component {
 		//fake auth for now
 		if ( 
 		email !== '' && 
-		name !== '' &&
-		password !== '' && 
+		name !== '' && 
 		password.length >= 6 
 		) {
 			this.setState({ redirectToReferrer: true });

@@ -40,10 +40,11 @@ class SignUp extends Component {
 		
 		//fake auth for now
 		if ( 
-					name !== '' &&
-					email !== '' && 
-					password !== '' && 
-					password.length >= 6 ) {
+		email !== '' && 
+		name !== '' &&
+		password !== '' && 
+		password.length >= 6 
+		) {
 			this.setState({ redirectToReferrer: true });
 		} else {
 			this.setState({ alertOpen: true });
@@ -102,8 +103,10 @@ class SignUp extends Component {
 								margin="normal"
 							/>
 						</Grid>
+
+						{/* When signup clicked call signup function, either display dialog or add new user  */}
 						<Button onClick={this.signUp} variant="contained" color="primary">
-							Login
+							Sign Up
 						</Button>
 					</form>
 					

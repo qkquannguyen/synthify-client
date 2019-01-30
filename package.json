@@ -1,6 +1,6 @@
 {
   "name": "synthify",
-  "version": "1.12.3",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "react-dom": "next",

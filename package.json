@@ -15,7 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "prettier --no-semi --single-quote --trailing-comma=none \"./src/**/*.js\"",
+    "lint-fix": "prettier --write --no-semi --single-quote --trailing-comma=none \"./src/**/*.js\""
   },
   "eslintConfig": {
     "extends": "react-app"

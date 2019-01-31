@@ -8,11 +8,27 @@ class HomePage extends Component {
     super(props);
     
     this.state = {
-      play: false
+      play: false,
+      currentTrack: {track: "", artist: ""}
     };
   }
 
   toggleAudio = () => { this.setState({ play: !this.state.play }); };
+
+  selectTrack = (trackInfo) => { this.setState({ currentTrack: trackInfo }); };
+
+  music = [
+    {track: "This Was a Home Once", artist:"Bad Suns"},
+    {track: "Oceans Away", artist: "A R I Z O N A"},
+    {track: "Fool for Love", artist:"Lord Huron"},
+    {track: "Feel It Boy", artist: "VHS Collection"},
+    {track: "Track 5", artist: "Artist 5"},
+    {track: "Track 6", artist: "Artist 6"},
+    {track: "Track 7", artist: "Artist 7"},
+    {track: "Track 8", artist: "Artist 8"},
+    {track: "Track 9", artist: "Artist 9"},
+    {track: "Track 10", artist: "Artist 10"},
+  ]
 
   render() {
     return (
@@ -20,7 +36,10 @@ class HomePage extends Component {
         <AppBar />
         <PlaylistDrawer
         toggleAudio={this.toggleAudio}
-        audioState={this.state.play} />
+        selectTrack={this.selectTrack}
+        audioState={this.state.play}
+        music={this.music}
+        currentTrack={this.state.currentTrack} />
       </div>
     );
   }

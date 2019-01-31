@@ -52,10 +52,10 @@ function MediaControlCard(props) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Live From Space
+            {props.currentTrack.track}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+            {props.currentTrack.artist}
           </Typography>
         </CardContent>
         <div className={classes.controls}>

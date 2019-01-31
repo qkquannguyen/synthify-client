@@ -33,12 +33,18 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
+    overflow: window.scroll,
     // padding: theme.spacing.unit * 3,
   },
 });
 
 function PermanentDrawerLeft(props) {
-  const { classes } = props;
+  const { classes } = props
+
+  var tracks = [];
+  for(var i = 0; i < props.music.length; i++) {
+    tracks[i] = props.music[i].track;
+  }
 
   return (
     <div className={classes.root}>
@@ -68,8 +74,8 @@ function PermanentDrawerLeft(props) {
 					<Grid container direction='column' alignItems='stretch' className={classes.root}>
 						<h2>Playlist 1</h2>
 						<List className={classes.list}>
-								{['Song1', 'Song2', 'Song3', 'Song4', 'Song5', 'Song6', 'Song7', 'Song8', 'Song9', 'Song10', 'Song11', 'Song12', 'Song13', 'Song14', 'Song15', 'Song16', 'Song17', 'Song18',].map((text, index) => (
-								<ListItem button key={text}>
+								{tracks.map((text, index) => (
+								<ListItem button key={text} onClick={() => props.selectTrack(props.music[index])}>
 								<ListItemText primary={text} />
 							</ListItem>
 							))}
@@ -79,7 +85,8 @@ function PermanentDrawerLeft(props) {
 					
 					<MusicPlayer
           toggleAudio={props.toggleAudio}
-          audioState={props.audioState} />
+          audioState={props.audioState}
+          currentTrack={props.currentTrack} />
 
       </main>
     </div>

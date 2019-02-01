@@ -75,7 +75,7 @@ function PermanentDrawerLeft(props) {
 						<h2>Playlist 1</h2>
 						<List className={classes.list}>
 								{tracks.map((text, index) => (
-								<ListItem button key={text} onClick={() => props.selectTrack(props.music[index])}>
+								<ListItem button key={text} onClick={() => props.changeSong(index)}>
 								<ListItemText primary={text} />
 							</ListItem>
 							))}
@@ -85,8 +85,10 @@ function PermanentDrawerLeft(props) {
 					
 					<MusicPlayer
           toggleAudio={props.toggleAudio}
+          changeSong={props.changeSong}
           audioState={props.audioState}
-          currentTrack={props.currentTrack} />
+          currentTrack={props.currentTrack}
+          music={props.music} />
 
       </main>
     </div>

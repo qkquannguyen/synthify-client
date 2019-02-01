@@ -13,10 +13,6 @@ class HomePage extends Component {
     };
   }
 
-  toggleAudio = () => { this.setState({ play: !this.state.play }); };
-
-  selectTrack = (trackInfo) => { this.setState({ currentTrack: trackInfo }); };
-
   music = [
     {track: "This Was a Home Once", artist:"Bad Suns"},
     {track: "Oceans Away", artist: "A R I Z O N A"},
@@ -30,13 +26,25 @@ class HomePage extends Component {
     {track: "Track 10", artist: "Artist 10"},
   ]
 
+  toggleAudio = () => { this.setState({ play: !this.state.play }); };
+
+  changeSong = (index) => {
+    if(index >= this.music.length) {
+      index = 0;
+    }
+    else if (index < 0) {
+      index = this.music.length - 1;
+    }
+    this.setState({ currentTrack: this.music[index] }); 
+  };
+
   render() {
     return (
       <div>
         <AppBar />
         <PlaylistDrawer
         toggleAudio={this.toggleAudio}
-        selectTrack={this.selectTrack}
+        changeSong={this.changeSong}
         audioState={this.state.play}
         music={this.music}
         currentTrack={this.state.currentTrack} />

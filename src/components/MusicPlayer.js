@@ -46,6 +46,8 @@ const styles = theme => ({
 function MediaControlCard(props) {
   const { classes, theme } = props;
 
+  var index = props.music.findIndex(s => s.track === props.currentTrack.track)
+
   return (
     <Grid container direction="column" alignitems="stretch"className={classes.root}>
     <Card className={classes.card}>
@@ -59,13 +61,13 @@ function MediaControlCard(props) {
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton aria-label="Previous">
+          <IconButton aria-label="Previous" onClick={() => props.changeSong(index - 1)}>
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
           <IconButton aria-label="Play/pause" onClick={props.toggleAudio}>
             {props.audioState === false ? <PlayArrowIcon className={classes.playPauseIcon} /> : <PauseIcon className={classes.playPauseIcon} />}
           </IconButton>
-          <IconButton aria-label="Next">
+          <IconButton aria-label="Next" onClick={() => props.changeSong(index + 1)}>
             {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
           </IconButton>
         </div>

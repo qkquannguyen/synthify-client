@@ -9,7 +9,9 @@ class HomePage extends Component {
     
     this.state = {
       play: false,
-      currentTrack: {track: "", artist: ""}
+      currentTrack: {track: "", artist: ""},
+      // Set our current index to null, the user could click any where in the songs array
+      currentIndex: null,
     };
   }
 
@@ -35,7 +37,9 @@ class HomePage extends Component {
     else if (index < 0) {
       index = this.music.length - 1;
     }
-    this.setState({ currentTrack: this.music[index] }); 
+
+    // Set our current index state
+    this.setState({ currentTrack: this.music[index], currentIndex: index }); 
   };
 
   render() {
@@ -47,7 +51,10 @@ class HomePage extends Component {
         changeSong={this.changeSong}
         audioState={this.state.play}
         music={this.music}
-        currentTrack={this.state.currentTrack} />
+        currentTrack={this.state.currentTrack}
+        // Pass it down
+        currentIndex={this.state.currentIndex}
+        />
       </div>
     );
   }

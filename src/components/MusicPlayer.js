@@ -44,9 +44,15 @@ const styles = theme => ({
 });
 
 function MediaControlCard(props) {
+  console.log(props);
   const { classes, theme } = props;
 
-  var index = props.music.findIndex(s => s.track === props.currentTrack.track)
+  // This is O(N) look up every time we re-render the component, expensive.
+  // var index = props.music.findIndex(s => s.track === props.currentTrack.track)
+
+  // var is global and mutable! Could produce undesired behavior.
+  // We use const to make it immutable, and let to have a locally scoped, mutable variable. 
+  const index = props.currentIndex
 
   return (
     <Grid container direction="column" alignitems="stretch"className={classes.root}>

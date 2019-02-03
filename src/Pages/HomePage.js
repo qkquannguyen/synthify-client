@@ -12,6 +12,9 @@ class HomePage extends Component {
       currentTrack: {track: "", artist: ""},
       // Set our current index to null, the user could click any where in the songs array
       currentIndex: null,
+      shuffle: false,
+      repeat: false,
+      repeatOne: false,
     };
   }
 
@@ -42,6 +45,23 @@ class HomePage extends Component {
     this.setState({ currentTrack: this.music[index], currentIndex: index }); 
   };
 
+  shuffleSongs = (index) => {
+    this.setState({ shuffle: !this.state.shuffle });
+  };
+
+  repeatSongs = (index) => {
+    if(!this.state.repeat) {
+      this.setState({ repeat: true });
+    }
+    else if (this.state.repeat && !this.state.repeatOne) {
+      this.setState({ repeatOne: true });
+    }
+    else {
+      this.setState({ repeat: false });
+      this.setState({ repeatOne: false });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -49,11 +69,16 @@ class HomePage extends Component {
         <PlaylistDrawer
         toggleAudio={this.toggleAudio}
         changeSong={this.changeSong}
+        shuffleSongs={this.shuffleSongs}
+        repeatSongs={this.repeatSongs}
         audioState={this.state.play}
         music={this.music}
         currentTrack={this.state.currentTrack}
         // Pass it down
         currentIndex={this.state.currentIndex}
+        shuffle={this.state.shuffle}
+        repeat={this.state.repeat}
+        repeatOne={this.state.repeatOne}
         />
       </div>
     );

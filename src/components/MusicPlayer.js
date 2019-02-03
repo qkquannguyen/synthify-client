@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import RepeatIcon from '@material-ui/icons/Repeat';
+import RepeatOneIcon from '@material-ui/icons/RepeatOne';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from '@material-ui/core/Grid';
 
@@ -36,6 +39,12 @@ const styles = theme => ({
     alignItems: 'center',
     paddingLeft: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
+  },
+  toggledIcon: {
+    color: 'blue',
+  },
+  untoggledIcon: {
+    color: 'gray',
   },
   playPauseIcon: {
     height: 38,
@@ -67,6 +76,9 @@ function MediaControlCard(props) {
           </Typography>
         </CardContent>
         <div className={classes.controls}>
+          <IconButton aria-label="Shuffle" onClick={() => props.shuffleSongs()}>
+            <ShuffleIcon className={props.shuffle === false ? classes.untoggledIcon : classes.toggledIcon} />
+          </IconButton>
           <IconButton aria-label="Previous" onClick={() => props.changeSong(index - 1)}>
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
@@ -75,6 +87,9 @@ function MediaControlCard(props) {
           </IconButton>
           <IconButton aria-label="Next" onClick={() => props.changeSong(index + 1)}>
             {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+          </IconButton>
+          <IconButton aria-label="Repeat" onClick={() => props.repeatSongs()}>
+            {!props.repeat ? <RepeatIcon /> : (props.repeat && !props.repeatOne) ? <RepeatIcon className={classes.toggledIcon} /> : <RepeatOneIcon className={classes.toggledIcon} />}
           </IconButton>
         </div>
       </div>

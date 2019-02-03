@@ -86,12 +86,17 @@ function PermanentDrawerLeft(props) {
 					<MusicPlayer
           toggleAudio={props.toggleAudio}
           changeSong={props.changeSong}
+          shuffleSongs={props.shuffleSongs}
+          repeatSongs={props.repeatSongs}
           audioState={props.audioState}
           currentTrack={props.currentTrack}
           // Keep passing down our current index of the songs array
           currentIndex={props.currentIndex}
-          music={props.music} />
-
+          music={props.music}
+          shuffle={props.shuffle} 
+          repeat={props.repeat}
+          repeatOne={props.repeatOne}
+          />
       </main>
     </div>
   );

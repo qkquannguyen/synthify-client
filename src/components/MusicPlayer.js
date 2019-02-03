@@ -44,7 +44,15 @@ const styles = theme => ({
 });
 
 function MediaControlCard(props) {
+  console.log(props);
   const { classes, theme } = props;
+
+  // This is O(N) look up every time we re-render the component, expensive.
+  // var index = props.music.findIndex(s => s.track === props.currentTrack.track)
+
+  // var is global and mutable! Could produce undesired behavior.
+  // We use const to make it immutable, and let to have a locally scoped, mutable variable. 
+  const index = props.currentIndex
 
   return (
     <Grid container direction="column" alignitems="stretch"className={classes.root}>
@@ -52,20 +60,20 @@ function MediaControlCard(props) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Live From Space
+            {props.currentTrack.track}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+            {props.currentTrack.artist}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton aria-label="Previous">
+          <IconButton aria-label="Previous" onClick={() => props.changeSong(index - 1)}>
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
           <IconButton aria-label="Play/pause" onClick={props.toggleAudio}>
             {props.audioState === false ? <PlayArrowIcon className={classes.playPauseIcon} /> : <PauseIcon className={classes.playPauseIcon} />}
           </IconButton>
-          <IconButton aria-label="Next">
+          <IconButton aria-label="Next" onClick={() => props.changeSong(index + 1)}>
             {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
           </IconButton>
         </div>

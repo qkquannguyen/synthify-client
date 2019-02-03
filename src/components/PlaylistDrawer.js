@@ -33,12 +33,13 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
+    overflow: window.scroll,
     // padding: theme.spacing.unit * 3,
   },
 });
 
 function PermanentDrawerLeft(props) {
-  const { classes } = props;
+  const { classes } = props
 
   return (
     <div className={classes.root}>
@@ -68,9 +69,14 @@ function PermanentDrawerLeft(props) {
 					<Grid container direction='column' alignItems='stretch' className={classes.root}>
 						<h2>Playlist 1</h2>
 						<List className={classes.list}>
-								{['Song1', 'Song2', 'Song3', 'Song4', 'Song5', 'Song6', 'Song7', 'Song8', 'Song9', 'Song10', 'Song11', 'Song12', 'Song13', 'Song14', 'Song15', 'Song16', 'Song17', 'Song18',].map((text, index) => (
-								<ListItem button key={text}>
-								<ListItemText primary={text} />
+                {/* We are previously passing down an array of objects,
+                the first argument of map is a callback to the object in an array,
+                we need to access the property of that object, in this case its the "track"
+                property.
+                */}
+								{props.music.map((song, index) => (
+								<ListItem button key={index} onClick={() => props.changeSong(index)}>
+								<ListItemText primary={song.track} />
 							</ListItem>
 							))}
 							
@@ -79,7 +85,12 @@ function PermanentDrawerLeft(props) {
 					
 					<MusicPlayer
           toggleAudio={props.toggleAudio}
-          audioState={props.audioState} />
+          changeSong={props.changeSong}
+          audioState={props.audioState}
+          currentTrack={props.currentTrack}
+          // Keep passing down our current index of the songs array
+          currentIndex={props.currentIndex}
+          music={props.music} />
 
       </main>
     </div>

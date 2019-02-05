@@ -86,7 +86,7 @@ function PermanentDrawerLeft(props) {
 					<MusicPlayer
           toggleAudio={props.toggleAudio}
           changeSong={props.changeSong}
-          shuffleSongs={props.shuffleSongs}
+          shuffleState={props.shuffleState}
           repeatSongs={props.repeatSongs}
           audioState={props.audioState}
           currentTrack={props.currentTrack}

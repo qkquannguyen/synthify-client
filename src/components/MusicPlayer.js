@@ -76,16 +76,16 @@ function MediaControlCard(props) {
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton aria-label="Shuffle" onClick={() => props.shuffleSongs()}>
-            <ShuffleIcon className={props.shuffle === false ? classes.untoggledIcon : classes.toggledIcon} />
+          <IconButton aria-label="Shuffle" onClick={() => props.shuffleState(index)}>
+            <ShuffleIcon className={!props.shuffle ? classes.untoggledIcon : classes.toggledIcon} />
           </IconButton>
-          <IconButton aria-label="Previous" onClick={() => props.changeSong(index - 1)}>
+          <IconButton aria-label="Previous" onClick={() => props.changeSong(index - 1, index)}>
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
           <IconButton aria-label="Play/pause" onClick={props.toggleAudio}>
-            {props.audioState === false ? <PlayArrowIcon className={classes.playPauseIcon} /> : <PauseIcon className={classes.playPauseIcon} />}
+            {!props.audioState ? <PlayArrowIcon className={classes.playPauseIcon} /> : <PauseIcon className={classes.playPauseIcon} />}
           </IconButton>
-          <IconButton aria-label="Next" onClick={() => props.changeSong(index + 1)}>
+          <IconButton aria-label="Next" onClick={() => props.changeSong(index + 1, index)}>
             {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
           </IconButton>
           <IconButton aria-label="Repeat" onClick={() => props.repeatSongs()}>

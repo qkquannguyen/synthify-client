@@ -45,6 +45,7 @@ class Login extends Component {
 
     //send to redux later right now just accept everyone with a username
     if ((email !== '') & (password !== '')) {
+      // Calling our actions that we mapped in connect on line 133
       this.props.login(email, password)
       // this.setState({ redirectToReferrer: true });
     } else {
@@ -127,6 +128,8 @@ class Login extends Component {
   }
 }
 
+// Connecting our component to the store
+// mapping our current state and actions
 const Wrapped = connect(
   state => state,
   { login }

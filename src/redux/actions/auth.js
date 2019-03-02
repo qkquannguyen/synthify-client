@@ -3,6 +3,7 @@ import { apiWrapper } from '../../services/api'
 export const AUTH_STATE_UPDATE = 'AUTH_STATE_UPDATE'
 export const AUTH_ERROR = 'AUTH_ERROR'
 
+// Basic action, returns an object
 export const updateAuth = authenicated => ({
   type: AUTH_STATE_UPDATE,
   authenicated

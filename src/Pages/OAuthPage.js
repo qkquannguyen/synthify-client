@@ -14,7 +14,7 @@ class OAuthPage extends Component {
       <Grid>
         <div>
           {token && (
-            <a href={`http://localhost:9292/login?t=${token}`}>google</a>
+            <a href={`http://localhost:9292/login/google?t=${token}`}>google</a>
           )}
           {token && (
             <a href={`http://localhost:9292/login/spotify?t=${token}`}>

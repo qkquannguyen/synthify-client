@@ -14,6 +14,7 @@ export const setError = err => ({
   error: err
 })
 
+// this action handles an async call using thunk
 export const register = (email, password, name) => {
   return dispatch => {
     apiWrapper('/auth/register', {
@@ -30,6 +31,7 @@ export const register = (email, password, name) => {
       })
       .catch(err => {
         console.error(err)
+        dispatch(setError(err))
       })
   }
 }

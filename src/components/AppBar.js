@@ -1,30 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import {
-	AppBar,
-	IconButton,
-	InputBase,
-	Toolbar,
-	Typography,
+  AppBar,
+  IconButton,
+  InputBase,
+  Toolbar,
+  Typography
 } from '@material-ui/core'
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
-import SettingsIcon from '@material-ui/icons/Settings';
-import SearchIcon from '@material-ui/icons/Search';
+import { fade } from '@material-ui/core/styles/colorManipulator'
+import { withStyles } from '@material-ui/core/styles'
+import SettingsIcon from '@material-ui/icons/Settings'
+import SearchIcon from '@material-ui/icons/Search'
 
 const styles = theme => ({
   root: {
-		width: '100%',
-		// marginLeft: 240,
+    width: '100%'
+    // marginLeft: 240,
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   title: {
-		display: 'none',
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+      display: 'block'
+    }
   },
   menuButton: {
     marginLeft: 8
@@ -34,14 +34,14 @@ const styles = theme => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit,
-      width: 'auto',
-    },
+      width: 'auto'
+    }
   },
   searchIcon: {
     width: theme.spacing.unit * 9,
@@ -50,11 +50,11 @@ const styles = theme => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   inputRoot: {
     color: 'inherit',
-    width: '100%',
+    width: '100%'
   },
   inputInput: {
     paddingTop: theme.spacing.unit,
@@ -66,19 +66,24 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       width: 120,
       '&:focus': {
-        width: 200,
-      },
-    },
-  },
-});
+        width: 200
+      }
+    }
+  }
+})
 
 function SearchAppBar(props) {
-  const { classes } = props;
+  const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar renderRedirect={props.renderRedirect} position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            noWrap
+          >
             Synthify
           </Typography>
           <div className={classes.grow} />
@@ -90,21 +95,26 @@ function SearchAppBar(props) {
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
-                input: classes.inputInput,
+                input: classes.inputInput
               }}
             />
           </div>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+          <IconButton
+            onClick={() => props.renderRedirect()}
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Open drawer"
+          >
             <SettingsIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
     </div>
-  );
+  )
 }
 
 SearchAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+  classes: PropTypes.object.isRequired
+}
 
-export default withStyles(styles)(SearchAppBar);
+export default withStyles(styles)(SearchAppBar)

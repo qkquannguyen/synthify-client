@@ -76,7 +76,11 @@ function SearchAppBar(props) {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar renderRedirect={props.renderRedirect} position="static">
+      <AppBar
+        position="static"
+        setRedirect={props.setRedirect}
+        renderRedirect={props.renderRedirect}
+      >
         <Toolbar>
           <Typography
             className={classes.title}
@@ -99,10 +103,11 @@ function SearchAppBar(props) {
               }}
             />
           </div>
+          {props.renderRedirect()}
           <IconButton
-            onClick={() => props.renderRedirect()}
-            className={classes.menuButton}
+            className={classes.IconButton}
             color="inherit"
+            onClick={props.setRedirect}
             aria-label="Open drawer"
           >
             <SettingsIcon />

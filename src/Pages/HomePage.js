@@ -16,18 +16,6 @@ class HomePage extends Component {
     }
   }
 
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/settings" />
-    }
-  }
-
   music = [
     { track: 'This Was a Home Once', artist: 'Bad Suns' },
     { track: 'Oceans Away', artist: 'A R I Z O N A' },
@@ -40,6 +28,16 @@ class HomePage extends Component {
     { track: 'Track 9', artist: 'Artist 9' },
     { track: 'Track 10', artist: 'Artist 10' }
   ]
+
+  setRedirect = () => {
+    this.setState({ redirect: true })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/settings" />
+    }
+  }
 
   toggleAudio = () => {
     this.setState({ play: !this.state.play })
@@ -59,7 +57,10 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <AppBar renderRedirect={this.renderRedirect} />
+        <AppBar
+          setRedirect={this.setRedirect}
+          renderRedirect={this.renderRedirect}
+        />
         <PlaylistDrawer
           toggleAudio={this.toggleAudio}
           changeSong={this.changeSong}

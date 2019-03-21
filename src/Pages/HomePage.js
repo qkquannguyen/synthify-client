@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import AppBar from '../components/AppBar'
 import PlaylistDrawer from '../components/PlaylistDrawer'
 
@@ -11,8 +10,7 @@ class HomePage extends Component {
       play: false,
       currentTrack: { track: '', artist: '' },
       // Set our current index to null, the user could click any where in the songs array
-      currentIndex: null,
-      redirect: false
+      currentIndex: null
     }
   }
 
@@ -28,16 +26,6 @@ class HomePage extends Component {
     { track: 'Track 9', artist: 'Artist 9' },
     { track: 'Track 10', artist: 'Artist 10' }
   ]
-
-  setRedirect = () => {
-    this.setState({ redirect: true })
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/settings" />
-    }
-  }
 
   toggleAudio = () => {
     this.setState({ play: !this.state.play })
@@ -57,10 +45,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <AppBar
-          setRedirect={this.setRedirect}
-          renderRedirect={this.renderRedirect}
-        />
+        <AppBar />
         <PlaylistDrawer
           toggleAudio={this.toggleAudio}
           changeSong={this.changeSong}

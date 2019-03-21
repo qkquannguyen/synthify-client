@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   AppBar,
@@ -76,11 +77,7 @@ function SearchAppBar(props) {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar
-        position="static"
-        setRedirect={props.setRedirect}
-        renderRedirect={props.renderRedirect}
-      >
+      <AppBar position="static">
         <Toolbar>
           <Typography
             className={classes.title}
@@ -103,11 +100,11 @@ function SearchAppBar(props) {
               }}
             />
           </div>
-          {props.renderRedirect()}
           <IconButton
+            component={Link}
+            to="settings"
             className={classes.IconButton}
             color="inherit"
-            onClick={props.setRedirect}
             aria-label="Open drawer"
           >
             <SettingsIcon />

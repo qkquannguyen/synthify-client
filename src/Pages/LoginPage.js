@@ -44,7 +44,7 @@ class Login extends Component {
     const { email, password } = this.state
 
     //send to redux later right now just accept everyone with a username
-    if ((email !== '') & (password !== '')) {
+    if ((email !== '') && (password !== '')) {
       // Calling our actions that we mapped in connect on line 133
       this.props.login(email, password)
       // this.setState({ redirectToReferrer: true });

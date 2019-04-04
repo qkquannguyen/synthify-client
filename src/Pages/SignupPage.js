@@ -55,8 +55,7 @@ class SignUp extends Component {
     const { classes, auth } = this.props
 
     let { alertOpen } = this.state
-    if (auth.authenicated)
-      return <Redirect to={'/oauth'} from={this.props.location} />
+    if (auth.authenicated) return <Redirect to={'/oauth'} />
 
     return (
       <div className={classes.root}>

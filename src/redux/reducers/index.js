@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux'
 
 import { AUTH_STATE_UPDATE, AUTH_ERROR } from '../actions/auth'
+import { SET_USER } from '../actions/user'
 
 // A reducer with our basic true/false state
-export const authReducer = (state = { authenicated: false }, action) => {
+export const authReducer = (
+  state = { authenicated: false, user: null },
+  action
+) => {
   // each action has a type
   switch (action.type) {
     // we get a matching type
@@ -18,9 +22,27 @@ export const authReducer = (state = { authenicated: false }, action) => {
   }
 }
 
+const user = {
+  email: null,
+  name: null
+}
+
+export const userReducer = (state = user, action) => {
+  switch (action.type) {
+    case SET_USER:
+      return { ...state, email: action.user.email, name: action.user.name }
+
+    default:
+      return state
+  }
+}
+
 // This will allow us to split up reducers later once our application grows
 const reducers = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  user: userReducer
+  // playlists
+  //
 })
 
 export default reducers

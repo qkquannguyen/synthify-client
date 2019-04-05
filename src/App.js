@@ -11,7 +11,6 @@ import { connect } from 'react-redux'
 import ProtectedRoute from './components/ProtectedRoute'
 import { NoMatch } from './components/NoMatch'
 
-import './App.css'
 import HomePage from './Pages/HomePage'
 const theme = createMuiTheme({ typography: { useNextVariants: true } })
 class App extends Component {

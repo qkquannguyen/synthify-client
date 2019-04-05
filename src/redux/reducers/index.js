@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import { AUTH_STATE_UPDATE, AUTH_ERROR } from '../actions/auth'
 import { SET_USER } from '../actions/user'
+import { SET_PLAYLISTS } from '../actions/services'
 
 // A reducer with our basic true/false state
 export const authReducer = (
@@ -27,6 +28,11 @@ const user = {
   name: null
 }
 
+const services = {
+  names: null,
+  playlists: null
+}
+
 export const userReducer = (state = user, action) => {
   switch (action.type) {
     case SET_USER:
@@ -37,12 +43,21 @@ export const userReducer = (state = user, action) => {
   }
 }
 
+export const servicesReducer = (state = services, action) => {
+  switch (action.type) {
+    case SET_PLAYLISTS:
+      return { ...state, playlists: action.playlists, names: action.services }
+
+    default:
+      return state
+  }
+}
+
 // This will allow us to split up reducers later once our application grows
 const reducers = combineReducers({
   auth: authReducer,
-  user: userReducer
-  // playlists
-  //
+  user: userReducer,
+  services: servicesReducer
 })
 
 export default reducers

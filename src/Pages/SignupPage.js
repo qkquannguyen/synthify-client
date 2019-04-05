@@ -10,6 +10,9 @@ import {
   TextField
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
+
+import { register } from '../redux/actions/auth'
 
 const styles = theme => ({
   root: {
@@ -41,17 +44,18 @@ class SignUp extends Component {
 
     //fake auth for now
     if (email !== '' && name !== '' && password.length >= 6) {
-      this.setState({ redirectToReferrer: true })
+      // this.setState({ redirectToReferrer: true });
+      this.props.register(email, password, name)
     } else {
       this.setState({ alertOpen: true })
     }
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, auth } = this.props
 
-    let { redirectToReferrer, alertOpen } = this.state
-    if (redirectToReferrer) return <Redirect to={'/Home'} />
+    let { alertOpen } = this.state
+    if (auth.authenicated) return <Redirect to={'/oauth'} />
 
     return (
       <div className={classes.root}>
@@ -131,4 +135,8 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styles)(SignUp)
+const Wrapped = connect(
+  state => state,
+  { register }
+)(SignUp)
+export default withStyles(styles)(Wrapped)

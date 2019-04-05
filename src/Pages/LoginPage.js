@@ -11,6 +11,9 @@ import {
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
+import { connect } from 'react-redux'
+import { login } from '../redux/actions/auth'
+
 const styles = theme => ({
   root: {
     // flexGrow: 1,
@@ -41,18 +44,19 @@ class Login extends Component {
     const { email, password } = this.state
 
     //send to redux later right now just accept everyone with a username
-    if ((email !== '') & (password !== '')) {
-      this.setState({ redirectToReferrer: true })
+    if (email !== '' && password !== '') {
+      // Calling our actions that we mapped in connect on line 133
+      this.props.login(email, password)
+      // this.setState({ redirectToReferrer: true });
     } else {
       this.setState({ alertOpen: true })
     }
   }
 
   render() {
-    const { classes } = this.props
-
-    let { redirectToReferrer, alertOpen } = this.state
-    if (redirectToReferrer) return <Redirect to={'/Home'} />
+    const { classes, auth } = this.props
+    const { alertOpen } = this.state
+    if (auth.authenicated) return <Redirect to={'/home'} />
 
     return (
       <div className={classes.root}>
@@ -124,4 +128,10 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles)(Login)
+// Connecting our component to the store
+// mapping our current state and actions
+const Wrapped = connect(
+  state => state,
+  { login }
+)(Login)
+export default withStyles(styles)(Wrapped)

@@ -46,12 +46,6 @@ const styles = theme => ({
 function MediaControlCard(props) {
   console.log(props)
   const { classes, theme } = props
-
-  // This is O(N) look up every time we re-render the component, expensive.
-  // var index = props.music.findIndex(s => s.track === props.currentTrack.track)
-
-  // var is global and mutable! Could produce undesired behavior.
-  // We use const to make it immutable, and let to have a locally scoped, mutable variable.
   const index = props.currentIndex
 
   return (
@@ -65,11 +59,11 @@ function MediaControlCard(props) {
         <div className={classes.details}>
           <CardContent className={classes.content}>
             <Typography component="h5" variant="h5">
-              {props.currentTrack.track}
+              {props.currentTrack.title}
             </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
+            {/* <Typography variant="subtitle1" color="textSecondary">
               {props.currentTrack.artist}
-            </Typography>
+            </Typography> */}
           </CardContent>
           <div className={classes.controls}>
             <IconButton

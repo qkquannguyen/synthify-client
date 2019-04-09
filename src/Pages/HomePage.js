@@ -3,7 +3,11 @@ import PlaylistDrawer from '../components/PlaylistDrawer'
 
 import { connect } from 'react-redux'
 
-import { getPlaylists, getPlaylistTracks } from '../redux/actions/services'
+import {
+  getPlaylists,
+  getPlaylistTracks,
+  setSelected
+} from '../redux/actions/services'
 
 class HomePage extends Component {
   constructor(props) {
@@ -13,7 +17,9 @@ class HomePage extends Component {
       play: false,
       currentTrack: { track: '', artist: '' },
       // Set our current index to null, the user could click any where in the songs array
-      currentIndex: null
+      currentIndex: null,
+      music: [],
+      currPlaylist: null
     }
   }
 
@@ -26,26 +32,43 @@ class HomePage extends Component {
   }
 
   getPlaylistTracks = (platform, id) => {
-    this.props.getPlaylistTracks(platform, id)
+    const { services } = this.props
+    const { playlistById } = services
+    if (playlistById[id] === undefined) {
+      this.props.getPlaylistTracks(platform, id)
+    } else {
+      this.props.setSelected(id)
+    }
   }
 
   changeSong = index => {
-    if (index >= this.music.length) {
+    const { services } = this.props
+    const { playlistById, selectedPlaylist } = services
+
+    if (playlistById[selectedPlaylist.id] === undefined) {
+      return
+    }
+
+    // good enough
+    if (index >= playlistById[selectedPlaylist.id].length) {
       index = 0
     } else if (index < 0) {
-      index = this.music.length - 1
+      index = playlistById[selectedPlaylist.id].length - 1
     }
 
     // Set our current index state
-    this.setState({ currentTrack: this.music[index], currentIndex: index })
+    this.setState({
+      currentTrack: playlistById[selectedPlaylist.id][index],
+      currentIndex: index
+    })
   }
 
   render() {
     const { services } = this.props
-    const { playlists, names } = services
-    return playlists && names ? (
+    const { allPlaylists, names, playlistById, selectedPlaylist } = services
+    return allPlaylists && names ? (
       <PlaylistDrawer
-        playlists={playlists}
+        playlists={allPlaylists}
         names={names}
         getTracks={this.getPlaylistTracks}
         toggleAudio={this.toggleAudio}
@@ -54,6 +77,11 @@ class HomePage extends Component {
         currentTrack={this.state.currentTrack}
         // Pass it down
         currentIndex={this.state.currentIndex}
+        music={
+          playlistById[selectedPlaylist.id]
+            ? playlistById[selectedPlaylist.id]
+            : []
+        }
       />
     ) : (
       <h1>Loading</h1>
@@ -63,5 +91,5 @@ class HomePage extends Component {
 
 export default connect(
   state => state,
-  { getPlaylists, getPlaylistTracks }
+  { getPlaylists, getPlaylistTracks, setSelected }
 )(HomePage)

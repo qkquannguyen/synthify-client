@@ -9,6 +9,18 @@ export const setPlaylists = (services, playlists) => ({
   playlists
 })
 
+export const addTracks = (platform, id, tracks) => ({
+  type: 'ADD_TRACKS',
+  platform,
+  id,
+  tracks
+})
+
+export const setSelected = id => ({
+  type: 'SELECT_PLAYLIST',
+  id
+})
+
 export const getPlaylists = () => {
   return dispatch => {
     apiWrapper('/playlists', {
@@ -31,7 +43,7 @@ export const getPlaylistTracks = (platform, id) => {
       method: 'GET'
     })
       .then(res => {
-        console.log(res)
+        dispatch(addTracks(platform, id, res[id]))
       })
       .catch(err => {
         console.error(err)

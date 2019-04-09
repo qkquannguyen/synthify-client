@@ -30,7 +30,9 @@ const user = {
 
 const services = {
   names: null,
-  playlists: null
+  allPlaylists: null,
+  playlistById: {},
+  selectedPlaylist: {}
 }
 
 export const userReducer = (state = user, action) => {
@@ -45,8 +47,32 @@ export const userReducer = (state = user, action) => {
 
 export const servicesReducer = (state = services, action) => {
   switch (action.type) {
+    // all platforms
     case SET_PLAYLISTS:
-      return { ...state, playlists: action.playlists, names: action.services }
+      return {
+        ...state,
+        allPlaylists: action.playlists,
+        names: action.services
+      }
+
+    // single platform
+    case 'ADD_TRACKS':
+      let obj = { [action.id]: action.tracks }
+      return Object.assign({}, state, {
+        playlistById: Object.assign({}, state.playlistById, obj),
+        selectedPlaylist: Object.assign({}, state.selectedPlaylist, {
+          id: action.id,
+          source: action.platform
+        })
+      })
+
+    case 'SELECT_PLAYLIST':
+      return Object.assign({}, state, {
+        selectedPlaylist: {
+          id: action.id,
+          title: action.title
+        }
+      })
 
     default:
       return state

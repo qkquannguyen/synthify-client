@@ -23,7 +23,7 @@ class HomePage extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getPlaylists()
   }
 

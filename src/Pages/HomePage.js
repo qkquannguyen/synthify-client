@@ -8,6 +8,7 @@ import {
   getPlaylistTracks,
   setSelected
 } from '../redux/actions/services'
+import { duration } from '@material-ui/core/styles/transitions'
 
 class HomePage extends Component {
   constructor(props) {
@@ -19,7 +20,9 @@ class HomePage extends Component {
       // Set our current index to null, the user could click any where in the songs array
       currentIndex: null,
       music: [],
-      currPlaylist: null
+      currPlaylist: null,
+      progress: null,
+      duration: null
     }
   }
 
@@ -30,6 +33,8 @@ class HomePage extends Component {
   toggleAudio = () => {
     this.setState({ play: !this.state.play })
   }
+
+  setProgress = (progress, duration) => this.setState({ progress, duration })
 
   getPlaylistTracks = (platform, id) => {
     const { services } = this.props
@@ -66,7 +71,7 @@ class HomePage extends Component {
   render() {
     const { services } = this.props
     const { allPlaylists, names, playlistById, selectedPlaylist } = services
-    return allPlaylists && names ? (
+    return allPlaylists ? (
       <PlaylistDrawer
         playlists={allPlaylists}
         names={names}
@@ -75,13 +80,15 @@ class HomePage extends Component {
         changeSong={this.changeSong}
         audioState={this.state.play}
         currentTrack={this.state.currentTrack}
-        // Pass it down
         currentIndex={this.state.currentIndex}
         music={
           playlistById[selectedPlaylist.id]
             ? playlistById[selectedPlaylist.id]
             : []
         }
+        setProgress={this.setProgress}
+        progress={this.state.progress}
+        duration={this.state.duration}
       />
     ) : (
       <h1>Loading</h1>

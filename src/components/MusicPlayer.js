@@ -10,6 +10,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import PauseIcon from '@material-ui/icons/Pause'
 import SkipNextIcon from '@material-ui/icons/SkipNext'
 import Grid from '@material-ui/core/Grid'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Sound from 'react-sound'
 
 const styles = theme => ({
   root: {
@@ -44,10 +46,9 @@ const styles = theme => ({
 })
 
 function MediaControlCard(props) {
-  console.log(props)
   const { classes, theme } = props
   const index = props.currentIndex
-
+  const progress = null
   return (
     <Grid
       container
@@ -61,9 +62,16 @@ function MediaControlCard(props) {
             <Typography component="h5" variant="h5">
               {props.currentTrack.title}
             </Typography>
-            {/* <Typography variant="subtitle1" color="textSecondary">
-              {props.currentTrack.artist}
-            </Typography> */}
+            {props.currentTrack.artist && (
+              <Typography variant="subtitle1" color="textSecondary">
+                {props.currentTrack.artist}
+              </Typography>
+            )}
+            {props.currentTrack.album && (
+              <Typography variant="subtitle1" color="textSecondary">
+                {props.currentTrack.album}
+              </Typography>
+            )}
           </CardContent>
           <div className={classes.controls}>
             <IconButton
@@ -94,8 +102,34 @@ function MediaControlCard(props) {
               )}
             </IconButton>
           </div>
+          <Sound
+            url={
+              props.currentTrack.stream_url ? props.currentTrack.stream_url : ''
+            }
+            playStatus={
+              props.audioState ? Sound.status.PLAYING : Sound.status.PAUSED
+            }
+            onFinishedPlaying={() => props.changeSong(index + 1)}
+            // questionable decisions here
+            onPlaying={({ position, duration }) =>
+              props.setProgress(position, duration)
+            }
+          />
         </div>
       </Card>
+      {props.progress >= 0 && (
+        <div>
+          <LinearProgress
+            color="secondary"
+            variant="determinate"
+            value={
+              props.progress
+                ? Math.floor((props.progress / props.duration) * 100)
+                : 0
+            }
+          />
+        </div>
+      )}
     </Grid>
   )
 }

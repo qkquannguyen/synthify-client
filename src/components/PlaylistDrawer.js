@@ -99,9 +99,11 @@ function PermanentDrawerLeft(props) {
           changeSong={props.changeSong}
           audioState={props.audioState}
           currentTrack={props.currentTrack}
-          // Keep passing down our current index of the songs array
           currentIndex={props.currentIndex}
           music={props.music}
+          setProgress={props.setProgress}
+          progress={props.progress}
+          duration={props.duration}
         />
       </main>
     </div>

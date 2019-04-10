@@ -48,7 +48,6 @@ const styles = theme => ({
 function MediaControlCard(props) {
   const { classes, theme } = props
   const index = props.currentIndex
-  const progress = null
   return (
     <Grid
       container

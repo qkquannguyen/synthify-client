@@ -76,11 +76,7 @@ function SearchAppBar(props) {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar
-        position="static"
-        setRedirect={props.setRedirect}
-        renderRedirect={props.renderRedirect}
-      >
+      <AppBar position="static">
         <Toolbar>
           <Typography
             className={classes.title}
@@ -92,26 +88,30 @@ function SearchAppBar(props) {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-            />
+            {props.auth && (
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+            )}
+            {props.auth && (
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+              />
+            )}
           </div>
-          {props.renderRedirect()}
-          <IconButton
-            className={classes.IconButton}
-            color="inherit"
-            onClick={props.setRedirect}
-            aria-label="Open drawer"
-          >
-            <SettingsIcon />
-          </IconButton>
+          {props.auth && (
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Open drawer"
+            >
+              <SettingsIcon />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
     </div>

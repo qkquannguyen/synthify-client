@@ -5,7 +5,11 @@ import {
   IconButton,
   InputBase,
   Toolbar,
-  Typography
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContentText,
+  DialogContent
 } from '@material-ui/core'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
@@ -76,7 +80,12 @@ function SearchAppBar(props) {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        openSettings={props.openSettings}
+        renderSettings={props.renderSettings}
+        closeSettings={props.closeSettings}
+      >
         <Toolbar>
           <Typography
             className={classes.title}
@@ -103,11 +112,12 @@ function SearchAppBar(props) {
               />
             )}
           </div>
+          {props.renderSettings()}
           {props.auth && (
             <IconButton
-              className={classes.menuButton}
+              className={classes.IconButton}
               color="inherit"
-              aria-label="Open drawer"
+              onClick={props.openSettings}
             >
               <SettingsIcon />
             </IconButton>

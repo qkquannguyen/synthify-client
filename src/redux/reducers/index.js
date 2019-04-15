@@ -5,7 +5,7 @@ import { SET_USER } from '../actions/user'
 
 // A reducer with our basic true/false state
 export const authReducer = (
-  state = { authenicated: true, user: null },
+  state = { authenicated: false, user: null },
   action
 ) => {
   // each action has a type

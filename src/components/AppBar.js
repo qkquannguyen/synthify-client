@@ -5,11 +5,7 @@ import {
   IconButton,
   InputBase,
   Toolbar,
-  Typography,
-  Dialog,
-  DialogActions,
-  DialogContentText,
-  DialogContent
+  Typography
 } from '@material-ui/core'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'

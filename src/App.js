@@ -30,18 +30,15 @@ class App extends Component {
   }
 
   closeSettings = () => {
-    console.log('Close Settings')
     this.setState({ isOpen: false })
   }
 
   openSettings = () => {
-    console.log('Setting state to True')
     this.setState({ isOpen: true })
   }
 
   renderSettings = () => {
     if (this.state.isOpen) {
-      console.log('Open!')
       return (
         <Dialog
           open={this.state.isOpen}

@@ -76,7 +76,12 @@ function SearchAppBar(props) {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        openSettings={props.openSettings}
+        renderSettings={props.renderSettings}
+        closeSettings={props.closeSettings}
+      >
         <Toolbar>
           <Typography
             className={classes.title}

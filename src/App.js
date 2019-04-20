@@ -12,21 +12,45 @@ import { NoMatch } from './components/NoMatch'
 
 import './App.css'
 import HomePage from './Pages/HomePage'
+import CloseIcon from '@material-ui/icons/Close'
 import {
   Button,
   Dialog,
+  Checkbox,
   DialogActions,
   DialogContent,
-  DialogContentText
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  DialogTitle
 } from '@material-ui/core'
+
 const theme = createMuiTheme({ typography: { useNextVariants: true } })
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      checked: [1]
     }
+  }
+
+  handleToggle = value => () => {
+    const { checked } = this.state
+    const currentIndex = checked.indexOf(value)
+    const newChecked = [...checked]
+
+    if (currentIndex === -1) {
+      newChecked.push(value)
+    } else {
+      newChecked.splice(currentIndex, 1)
+    }
+
+    this.setState({
+      checked: newChecked
+    })
   }
 
   closeSettings = () => {
@@ -43,17 +67,27 @@ class App extends Component {
         <Dialog
           open={this.state.isOpen}
           onClose={this.closeSettings}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          fullScreen
         >
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Settings
-            </DialogContentText>
+            <DialogTitle>Settings</DialogTitle>
+            <List dense>
+              {['Some Item', 'Dark Theme', 'Other Items'].map(value => (
+                <ListItem key={value} button>
+                  <ListItemText primary={`${value}`} />
+                  <ListItemSecondaryAction>
+                    <Checkbox
+                      onChange={this.handleToggle(value)}
+                      checked={this.state.checked.indexOf(value) !== -1}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.closeSettings} color="primary">
-              Close
+              <CloseIcon />
             </Button>
           </DialogActions>
         </Dialog>

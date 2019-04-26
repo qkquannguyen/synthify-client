@@ -8,7 +8,8 @@ import {
   getPlaylistTracks,
   setSelected
 } from '../redux/actions/services'
-import { duration } from '@material-ui/core/styles/transitions'
+
+import { toggleModal } from '../redux/actions/settings'
 
 class HomePage extends Component {
   constructor(props) {
@@ -71,6 +72,7 @@ class HomePage extends Component {
   render() {
     const { services } = this.props
     const { allPlaylists, names, playlistById, selectedPlaylist } = services
+    console.log(this.props)
     return allPlaylists ? (
       <PlaylistDrawer
         playlists={allPlaylists}
@@ -89,6 +91,8 @@ class HomePage extends Component {
         setProgress={this.setProgress}
         progress={this.state.progress}
         duration={this.state.duration}
+        isModalOpen={this.props.settings.isModalOpen}
+        toggleModal={this.props.toggleModal}
       />
     ) : (
       <h1>Loading</h1>
@@ -98,5 +102,5 @@ class HomePage extends Component {
 
 export default connect(
   state => state,
-  { getPlaylists, getPlaylistTracks, setSelected }
+  { getPlaylists, getPlaylistTracks, setSelected, toggleModal }
 )(HomePage)

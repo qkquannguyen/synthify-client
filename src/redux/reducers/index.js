@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { AUTH_STATE_UPDATE, AUTH_ERROR } from '../actions/auth'
 import { SET_USER } from '../actions/user'
 import { SET_PLAYLISTS } from '../actions/services'
+import { SET_SETTINGS_MODAL_OPEN } from '../actions/settings'
 
 // A reducer with our basic true/false state
 export const authReducer = (
@@ -35,10 +36,24 @@ const services = {
   selectedPlaylist: {}
 }
 
+const settings = {
+  isModalOpen: false
+}
+
 export const userReducer = (state = user, action) => {
   switch (action.type) {
     case SET_USER:
       return { ...state, email: action.user.email, name: action.user.name }
+
+    default:
+      return state
+  }
+}
+
+export const settingsReducer = (state = settings, action) => {
+  switch (action.type) {
+    case SET_SETTINGS_MODAL_OPEN:
+      return { ...state, isModalOpen: !state.isModalOpen }
 
     default:
       return state
@@ -83,7 +98,8 @@ export const servicesReducer = (state = services, action) => {
 const reducers = combineReducers({
   auth: authReducer,
   user: userReducer,
-  services: servicesReducer
+  services: servicesReducer,
+  settings: settingsReducer
 })
 
 export default reducers

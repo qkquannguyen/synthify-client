@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   AppBar,
@@ -11,6 +11,9 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SearchIcon from '@material-ui/icons/Search'
+
+//Redux imports
+import { connect } from 'react-redux'
 
 const styles = theme => ({
   root: {
@@ -72,50 +75,53 @@ const styles = theme => ({
   }
 })
 
-function SearchAppBar(props) {
-  const { classes } = props
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography
-            className={classes.title}
-            variant="h6"
-            color="inherit"
-            noWrap
-          >
-            Synthify
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.search}>
-            {props.auth && (
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-            )}
-            {props.auth && (
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            )}
-          </div>
-          {props.auth && (
-            <IconButton
-              className={classes.menuButton}
+class SearchAppBar extends Component {
+  render() {
+    const { classes } = this.props
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography
+              className={classes.title}
+              variant="h6"
               color="inherit"
-              aria-label="Open drawer"
+              noWrap
             >
-              <SettingsIcon />
-            </IconButton>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  )
+              Synthify
+            </Typography>
+            <div className={classes.grow} />
+            <div className={classes.search}>
+              {this.props.auth && (
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+              )}
+              {this.props.auth && (
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                />
+              )}
+            </div>
+            {this.props.auth && (
+              <IconButton
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.props.toggle}
+              >
+                <SettingsIcon />
+              </IconButton>
+            )}
+          </Toolbar>
+        </AppBar>
+      </div>
+    )
+  }
 }
 
 SearchAppBar.propTypes = {

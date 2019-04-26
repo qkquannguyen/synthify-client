@@ -12,14 +12,18 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { NoMatch } from './components/NoMatch'
 
 import HomePage from './Pages/HomePage'
+import { toggleModal } from './redux/actions/settings'
+
 const theme = createMuiTheme({ typography: { useNextVariants: true } })
+
 class App extends Component {
   render() {
+    console.log(this.props)
     const { auth } = this.props
     const { authenicated } = auth
     return (
       <ThemeProvider theme={theme}>
-        <AppBar auth={authenicated} />
+        <AppBar auth={authenicated} toggle={this.props.toggleModal} />
         <Router>
           <Switch>
             {/* Routes for app using react router v4 
@@ -54,5 +58,5 @@ class App extends Component {
 
 export default connect(
   state => state,
-  null
+  { toggleModal }
 )(App)

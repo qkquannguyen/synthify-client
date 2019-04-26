@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid } from '@material-ui/core'
-
+import { Link } from 'react-router-dom'
 // TODO: Make this less ugly
 class OAuthPage extends Component {
   render() {
@@ -22,6 +22,9 @@ class OAuthPage extends Component {
             </a>
           )}
         </div>
+        <Link to="/home">
+          <p> Continue to Home </p>
+        </Link>
       </Grid>
     )
   }

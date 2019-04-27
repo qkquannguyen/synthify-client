@@ -18,7 +18,6 @@ const theme = createMuiTheme({ typography: { useNextVariants: true } })
 
 class App extends Component {
   render() {
-    console.log(this.props)
     const { auth } = this.props
     const { authenicated } = auth
     return (

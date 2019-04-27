@@ -72,7 +72,6 @@ class HomePage extends Component {
   render() {
     const { services } = this.props
     const { allPlaylists, names, playlistById, selectedPlaylist } = services
-    console.log(this.props)
     return allPlaylists ? (
       <PlaylistDrawer
         playlists={allPlaylists}

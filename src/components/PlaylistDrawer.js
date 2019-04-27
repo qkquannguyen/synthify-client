@@ -8,16 +8,12 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemText,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText
+  ListItemText
 } from '@material-ui/core'
 
 import NestedList from './NestedList'
 import MusicPlayer from './MusicPlayer'
+import SettingsModal from './SettingsModal'
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -49,12 +45,8 @@ class PermanentDrawerLeft extends Component {
     alertOpen: false
   }
 
-  componentDidMount() {
-    // this.setState({ alertOpen: this.props.isSettingModalOpen })
-  }
   render() {
     const { classes } = this.props
-    console.log(this.props)
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -119,25 +111,11 @@ class PermanentDrawerLeft extends Component {
             progress={this.props.progress}
             duration={this.props.duration}
           />
-          {/* Alert Box open when the user has incorrectly entered their email or password */}
-          <Dialog
-            open={this.props.isModalOpen}
-            onClose={this.props.toggleModal}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                You have entered an Invalid Email and/or Password. Please try
-                again.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.props.toggleModal} color="primary">
-                Okay
-              </Button>
-            </DialogActions>
-          </Dialog>
+          <SettingsModal
+            isModalOpen={this.props.isModalOpen}
+            toggleModal={this.props.toggleModal}
+            names={this.props.names}
+          />
         </main>
       </div>
     )

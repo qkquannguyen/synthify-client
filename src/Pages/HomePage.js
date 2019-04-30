@@ -94,7 +94,7 @@ class HomePage extends Component {
         toggleModal={this.props.toggleModal}
       />
     ) : (
-      // Loading Icon
+      // Loading Icon svg note: the linter hates this lol
       <div
         style={{
           marginTop: '200px',
@@ -109,7 +109,6 @@ class HomePage extends Component {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 100 100"
           preserveAspectRatio="xMidYMid"
-          class="lds-bar-chart"
         >
           <g transform="rotate(180 50 50)">
             <rect

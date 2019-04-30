@@ -7,7 +7,6 @@ import {
   DialogContentText
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { unstable_Box as Box } from '@material-ui/core/Box'
 
 const styles = theme => ({
   root: {
@@ -24,10 +23,9 @@ class SettingsModal extends Component {
       /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
       '$1'
     )
-    const { classes, names } = this.props
+    const { names } = this.props
 
     // Filtering out which services we are logged into
-    // It's ugly
     const services = [
       { name: 'spotify', url: `http://localhost:9292/login/google?t=${token}` },
       { name: 'google', url: `http://localhost:9292/login/google?t=${token}` }
@@ -37,7 +35,6 @@ class SettingsModal extends Component {
       return !names.includes(service.name)
     })
 
-    console.log(ServicesLogin)
     return (
       <div style={{ width: '100%' }}>
         <Dialog
@@ -63,26 +60,6 @@ class SettingsModal extends Component {
                 </Button>
               ))}
             </div>
-            {/* <Button>
-                  {token && (
-                    <a 
-                      href={`http://localhost:9292/login/google?t=${token}`}
-                      style={{ textDecoration: 'none'}}
-                      >
-                      google
-                    </a>
-                  )}
-                </Button>
-                <Button>
-                  {token && (
-                    <a 
-                      href={`http://localhost:9292/login/spotify?t=${token}`}
-                      style={{ textDecoration: 'none'}}
-                      > 
-                      spotify 
-                    </a>
-                  )}
-                </Button> */}
             <DialogContentText id="alert-dialog-description">
               Logout
             </DialogContentText>

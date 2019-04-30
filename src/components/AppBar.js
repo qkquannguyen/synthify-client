@@ -12,9 +12,6 @@ import { withStyles } from '@material-ui/core/styles'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SearchIcon from '@material-ui/icons/Search'
 
-//Redux imports
-import { connect } from 'react-redux'
-
 const styles = theme => ({
   root: {
     width: '100%'

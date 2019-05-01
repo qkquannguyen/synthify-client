@@ -128,18 +128,18 @@ class HomePage extends Component {
       </MuiThemeProvider>
     ) : (
       // Loading Icon svg
-      <MuiThemeProvider theme={theme}>
-        <div
-          styles={{
-            marginTop: '200px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <img src={require('../images/loading.svg')} alt={'loading'} />
-        </div>
-      </MuiThemeProvider>
+      <div
+        style={{
+          marginTop: '200px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column'
+        }}
+      >
+        <img src={require('../images/loading.svg')} alt={'loading'} />
+        <h3> Loading </h3>
+      </div>
     )
   }
 }

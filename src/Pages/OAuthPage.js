@@ -51,7 +51,7 @@ class OAuthPage extends Component {
                   height: '150px',
                   borderRadius: '100px',
                   margin: '50px',
-                  background: '#cccccc'
+                  background: '#a5a4a4'
                 }}
               >
                 <a

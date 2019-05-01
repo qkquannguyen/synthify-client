@@ -14,14 +14,16 @@ import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { login } from '../redux/actions/auth'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-
+import '../App.css'
 const theme = createMuiTheme({
   typography: { useNextVariants: true },
 
   overrides: {
+    palette: {
+      type: 'dark'
+    },
     MuiButton: {
       text: {
-        // Some CSS
         background: 'linear-gradient(45deg, #FE6B8B 20%, #FF8E53 90%)',
         borderRadius: 3,
         border: 0,
@@ -34,7 +36,6 @@ const theme = createMuiTheme({
 
 const styles = theme => ({
   root: {
-    // flexGrow: 1,
     textAlign: 'center',
     marginTop: '50px'
   }
@@ -97,6 +98,7 @@ class Login extends Component {
               >
                 <Grid item xs={12}>
                   <TextField
+                    className={classes.cssUnderline}
                     id="standard-username"
                     label="email"
                     value={this.state.email}
@@ -127,7 +129,7 @@ class Login extends Component {
               </form>
             </div>
 
-            <Link to="/signup" style={{ color: '#b3b3b3' }}>
+            <Link to="/signup" style={{ color: 'rgb(58, 58, 58)' }}>
               <p> Sign Up </p>
             </Link>
             {/* Alert Box open when the user has incorrectly entered their email or password */}

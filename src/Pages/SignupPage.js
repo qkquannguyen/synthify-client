@@ -41,7 +41,7 @@ const theme = createMuiTheme({
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    marginTop: '100px'
+    marginTop: '50px'
   }
 })
 
@@ -91,7 +91,7 @@ class SignUp extends Component {
             justify="flex-end"
             alignItems="center"
           >
-            <h2>Sign Up</h2>
+            <h1>Sign Up</h1>
             <form
               onSubmit={event => {
                 event.preventDefault()
@@ -131,7 +131,14 @@ class SignUp extends Component {
               </Grid>
 
               {/* When signup clicked call signup function, either display dialog or add new user  */}
-              <Button onClick={this.signUp} style={{ marginTop: '20px' }}>
+              <Button
+                onClick={this.signUp}
+                style={{
+                  marginTop: '20px',
+                  padding: '10px 40px',
+                  borderRadius: '20px'
+                }}
+              >
                 Sign Up
               </Button>
             </form>

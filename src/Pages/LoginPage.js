@@ -36,7 +36,7 @@ const styles = theme => ({
   root: {
     // flexGrow: 1,
     textAlign: 'center',
-    marginTop: '100px'
+    marginTop: '50px'
   }
 })
 
@@ -87,7 +87,7 @@ class Login extends Component {
             className={classes.root}
           >
             <div>
-              <h2>Sign in</h2>
+              <h1>Login</h1>
               <form
                 onSubmit={event => {
                   event.preventDefault()
@@ -114,9 +114,16 @@ class Login extends Component {
                     margin="normal"
                   />
                 </Grid>
-                <Button onClick={this.login}>Login</Button>
-
-                <p> or </p>
+                <Button
+                  onClick={this.login}
+                  style={{
+                    marginTop: '20px',
+                    padding: '10px 40px',
+                    borderRadius: '20px'
+                  }}
+                >
+                  Login
+                </Button>
               </form>
             </div>
 

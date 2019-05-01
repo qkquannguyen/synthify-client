@@ -65,7 +65,7 @@ class SettingsModal extends Component {
             </DialogContentText>
             {names.map((name, index) => (
               <div key={index}>
-                <Button>{name}</Button>
+                <Button style={{ margin: '9px' }}>{name}</Button>
               </div>
             ))}
           </DialogContent>

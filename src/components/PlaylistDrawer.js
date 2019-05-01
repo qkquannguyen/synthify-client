@@ -31,6 +31,13 @@ const styles = theme => ({
   drawerPaper: {
     width: drawerWidth
   },
+  text: {
+    marginTop: '200px',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -46,7 +53,7 @@ class PermanentDrawerLeft extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, theme } = this.props
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -59,6 +66,17 @@ class PermanentDrawerLeft extends Component {
           anchor="left"
         >
           <div className={classes.toolbar} />
+          <h2
+            style={{
+              marginTop: '-48px',
+              display: 'flex',
+              justifyContent: 'center',
+              color: '#fce9ea',
+              fontFamily: 'Tahoma'
+            }}
+          >
+            Synthify
+          </h2>
           <Divider />
           <List>
             {this.props.names.map((name, index) =>
@@ -75,30 +93,47 @@ class PermanentDrawerLeft extends Component {
           </List>
         </Drawer>
         <main className={classes.content}>
-          {/* <div className={classes.toolbar} /> */}
-          <Grid
-            container
-            direction="column"
-            alignItems="stretch"
-            className={classes.root}
-          >
-            <List className={classes.list}>
-              {/* We are previously passing down an array of objects,
-                  the first argument of map is a callback to the object in an array,
-                  we need to access the property of that object, in this case its the "track"
-                  property.
-                  */}
-              {this.props.music.map((song, index) => (
-                <ListItem
-                  button
-                  key={index}
-                  onClick={() => this.props.changeSong(index)}
-                >
-                  <ListItemText primary={song.title} />
-                </ListItem>
-              ))}
-            </List>
-          </Grid>
+          {this.props.music && (
+            <Grid
+              container
+              direction="column"
+              alignItems="stretch"
+              className={classes.root}
+            >
+              <List className={classes.list}>
+                {/* We are previously passing down an array of objects,
+                    the first argument of map is a callback to the object in an array,
+                    we need to access the property of that object, in this case its the "track"
+                    property.
+                    */}
+                {this.props.music.map((song, index) => (
+                  <ListItem
+                    button
+                    key={index}
+                    onClick={() => this.props.changeSong(index)}
+                  >
+                    <ListItemText primary={song.title} />
+                  </ListItem>
+                ))}
+              </List>
+            </Grid>
+          )}
+          {this.props.music && (
+            // If no music loaded tell user to select a song from the playlist drawer
+            <div
+              style={{
+                marginTop: '200px',
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center',
+                color: 'white'
+              }}
+            >
+              <img src={require('../images/loading.svg')} />
+              <h4> Select a playlist to start listening</h4>
+            </div>
+          )}
 
           <MusicPlayer
             toggleAudio={this.props.toggleAudio}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PlaylistDrawer from '../components/PlaylistDrawer'
 
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
 
 import {
   getPlaylists,
@@ -10,6 +11,42 @@ import {
 } from '../redux/actions/services'
 
 import { toggleModal } from '../redux/actions/settings'
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import grey from '@material-ui/core/colors/grey'
+import deepOrange from '@material-ui/core/colors/deepOrange'
+
+const theme = createMuiTheme({
+  typography: { useNextVariants: true },
+  palette: {
+    primary: { main: grey[900] },
+    secondary: { main: deepOrange[200] },
+    type: 'dark'
+  },
+  overrides: {
+    MuiButton: {
+      text: {
+        // Some CSS
+        background: 'linear-gradient(45deg, #FE6B8B 20%, #FF8E53 90%)',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)'
+      }
+    }
+  }
+})
+
+// #ed626a
+const styles = theme => ({
+  root: {
+    textAlign: 'center'
+  },
+  title: {
+    background: '-webkit-linear-gradient(#eee, #333)'
+  }
+})
 
 class HomePage extends Component {
   constructor(props) {
@@ -73,132 +110,49 @@ class HomePage extends Component {
     const { services } = this.props
     const { allPlaylists, names, playlistById, selectedPlaylist } = services
     return allPlaylists ? (
-      <PlaylistDrawer
-        playlists={allPlaylists}
-        names={names}
-        getTracks={this.getPlaylistTracks}
-        toggleAudio={this.toggleAudio}
-        changeSong={this.changeSong}
-        audioState={this.state.play}
-        currentTrack={this.state.currentTrack}
-        currentIndex={this.state.currentIndex}
-        music={
-          playlistById[selectedPlaylist.id]
-            ? playlistById[selectedPlaylist.id]
-            : []
-        }
-        setProgress={this.setProgress}
-        progress={this.state.progress}
-        duration={this.state.duration}
-        isModalOpen={this.props.settings.isModalOpen}
-        toggleModal={this.props.toggleModal}
-      />
+      <MuiThemeProvider theme={theme}>
+        <PlaylistDrawer
+          theme={this.props.theme}
+          playlists={allPlaylists}
+          names={names}
+          getTracks={this.getPlaylistTracks}
+          toggleAudio={this.toggleAudio}
+          changeSong={this.changeSong}
+          audioState={this.state.play}
+          currentTrack={this.state.currentTrack}
+          currentIndex={this.state.currentIndex}
+          music={
+            playlistById[selectedPlaylist.id]
+              ? playlistById[selectedPlaylist.id]
+              : []
+          }
+          setProgress={this.setProgress}
+          progress={this.state.progress}
+          duration={this.state.duration}
+          isModalOpen={this.props.settings.isModalOpen}
+          toggleModal={this.props.toggleModal}
+        />
+      </MuiThemeProvider>
     ) : (
       // Loading Icon svg note: the linter hates this lol
-      <div
-        style={{
-          marginTop: '200px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <svg
-          width="100px"
-          height="100px"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="xMidYMid"
+      <MuiThemeProvider theme={theme}>
+        <div
+          styles={{
+            marginTop: '200px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
         >
-          <g transform="rotate(180 50 50)">
-            <rect
-              ng-attr-x="{{config.x1}}"
-              y="15"
-              ng-attr-width="{{config.width}}"
-              height="31.1848"
-              fill="#f7f7f7"
-              x="15"
-              width="10"
-            >
-              <animate
-                attributeName="height"
-                calcMode="spline"
-                values="50;70;30;50"
-                keyTimes="0;0.33;0.66;1"
-                dur="1"
-                keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
-                begin="-0.4s"
-                repeatCount="indefinite"
-              />
-            </rect>
-            <rect
-              ng-attr-x="{{config.x2}}"
-              y="15"
-              ng-attr-width="{{config.width}}"
-              height="42.7357"
-              fill="#545454"
-              x="35"
-              width="10"
-            >
-              <animate
-                attributeName="height"
-                calcMode="spline"
-                values="50;70;30;50"
-                keyTimes="0;0.33;0.66;1"
-                dur="1"
-                keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
-                begin="-0.2s"
-                repeatCount="indefinite"
-              />
-            </rect>
-            <rect
-              ng-attr-x="{{config.x3}}"
-              y="15"
-              ng-attr-width="{{config.width}}"
-              height="48.4843"
-              fill="#141414"
-              x="55"
-              width="10"
-            >
-              <animate
-                attributeName="height"
-                calcMode="spline"
-                values="50;70;30;50"
-                keyTimes="0;0.33;0.66;1"
-                dur="1"
-                keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
-                begin="-0.6s"
-                repeatCount="indefinite"
-              />
-            </rect>
-            <rect
-              ng-attr-x="{{config.x4}}"
-              y="15"
-              ng-attr-width="{{config.width}}"
-              height="69.9963"
-              fill="#cdcdcd"
-              x="75"
-              width="10"
-            >
-              <animate
-                attributeName="height"
-                calcMode="spline"
-                values="50;70;30;50"
-                keyTimes="0;0.33;0.66;1"
-                dur="1"
-                keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
-                begin="0s"
-                repeatCount="indefinite"
-              />
-            </rect>
-          </g>
-        </svg>
-      </div>
+          <img src={require('../images/loading.svg')} alt={'loading'} />
+        </div>
+      </MuiThemeProvider>
     )
   }
 }
 
-export default connect(
+const Wrapped = connect(
   state => state,
   { getPlaylists, getPlaylistTracks, setSelected, toggleModal }
 )(HomePage)
+export default withStyles(styles)(Wrapped)

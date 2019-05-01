@@ -5,7 +5,8 @@ import {
   IconButton,
   InputBase,
   Toolbar,
-  Typography
+  Typography,
+  MuiThemeProvider
 } from '@material-ui/core'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
@@ -76,8 +77,8 @@ class SearchAppBar extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div className={classes.root}>
-        <AppBar position="static">
+      <MuiThemeProvider theme={this.props.theme}>
+        <AppBar position="static" className={classes.root}>
           <Toolbar>
             <Typography
               className={classes.title}
@@ -116,7 +117,7 @@ class SearchAppBar extends Component {
             )}
           </Toolbar>
         </AppBar>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }

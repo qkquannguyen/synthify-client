@@ -42,9 +42,12 @@ const styles = theme => ({
     alignItems: 'center'
   },
   toolbar: theme.mixins.toolbar,
+  songitem: {
+    alignItems: 'flex-start'
+  },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    // backgroundColor: theme.palette.background.default,
     overflow: window.scroll
   }
 })
@@ -107,21 +110,19 @@ class PermanentDrawerLeft extends Component {
             <Grid
               container
               direction="column"
-              alignItems="stretch"
+              // alignItems="stretch"
               className={classes.root}
             >
               <List className={classes.list}>
                 <ListItem>
-                  {/* MaterialUI: "Let's not let pe" */}
                   <ListItemText
                     disableTypography
                     primary={
                       <Typography type="body1" style={{ color: '#cc9c9' }}>
                         {' '}
-                        Title{' '}
+                        Title - Artist{' '}
                       </Typography>
                     }
-                    // secondary={<Typography type="body2" style={{ color: '#a5a5a5' }}> Artist </Typography>}
                   />
                 </ListItem>
                 <Divider />
@@ -132,6 +133,7 @@ class PermanentDrawerLeft extends Component {
                     */}
                 {this.props.music.map((song, index) => (
                   <ListItem
+                    className={classes.songitem}
                     button
                     key={index}
                     onClick={() => this.props.changeSong(index)}

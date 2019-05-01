@@ -118,7 +118,7 @@ class PermanentDrawerLeft extends Component {
               </List>
             </Grid>
           )}
-          {this.props.music && (
+          {this.props.music.length === 0 && (
             // If no music loaded tell user to select a song from the playlist drawer
             <div
               style={{
@@ -130,7 +130,7 @@ class PermanentDrawerLeft extends Component {
                 color: 'white'
               }}
             >
-              <img src={require('../images/loading.svg')} />
+              <img src={require('../images/loading.svg')} alt="loading" />
               <h4> Select a playlist to start listening</h4>
             </div>
           )}

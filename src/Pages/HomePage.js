@@ -36,13 +36,9 @@ const theme = createMuiTheme({
   }
 })
 
-// #ed626a
 const styles = theme => ({
   root: {
     textAlign: 'center'
-  },
-  title: {
-    background: '-webkit-linear-gradient(#eee, #333)'
   }
 })
 
@@ -110,7 +106,6 @@ class HomePage extends Component {
     return allPlaylists ? (
       <MuiThemeProvider theme={theme}>
         <PlaylistDrawer
-          theme={this.props.theme}
           playlists={allPlaylists}
           names={names}
           getTracks={this.getPlaylistTracks}
@@ -132,7 +127,7 @@ class HomePage extends Component {
         />
       </MuiThemeProvider>
     ) : (
-      // Loading Icon svg note: the linter hates this lol
+      // Loading Icon svg
       <MuiThemeProvider theme={theme}>
         <div
           styles={{

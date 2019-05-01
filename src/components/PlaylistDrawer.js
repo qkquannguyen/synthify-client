@@ -8,7 +8,9 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  Typography,
+  ListItemSecondaryAction
 } from '@material-ui/core'
 
 import NestedList from './NestedList'
@@ -43,7 +45,6 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     overflow: window.scroll
-    // padding: theme.spacing.unit * 3,
   }
 })
 
@@ -53,7 +54,7 @@ class PermanentDrawerLeft extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -93,7 +94,7 @@ class PermanentDrawerLeft extends Component {
           </List>
         </Drawer>
         <main className={classes.content}>
-          {this.props.music && (
+          {this.props.music.length > 0 && (
             <Grid
               container
               direction="column"
@@ -101,6 +102,24 @@ class PermanentDrawerLeft extends Component {
               className={classes.root}
             >
               <List className={classes.list}>
+                <ListItem>
+                  {/* MaterialUI: "Let's not let pe" */}
+                  <ListItemText
+                    disableTypography
+                    primary={
+                      <Typography type="body1" style={{ color: '#c9c9c9' }}>
+                        {' '}
+                        Title{' '}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography type="body2" style={{ color: '#a5a5a5' }}>
+                        {' '}
+                        Artist{' '}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
                 {/* We are previously passing down an array of objects,
                     the first argument of map is a callback to the object in an array,
                     we need to access the property of that object, in this case its the "track"
@@ -112,7 +131,10 @@ class PermanentDrawerLeft extends Component {
                     key={index}
                     onClick={() => this.props.changeSong(index)}
                   >
-                    <ListItemText primary={song.title} />
+                    <ListItemText
+                      primary={song.title}
+                      secondary={song.artist}
+                    />
                   </ListItem>
                 ))}
               </List>

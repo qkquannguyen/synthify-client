@@ -16,6 +16,7 @@ import {
 import NestedList from './NestedList'
 import MusicPlayer from './MusicPlayer'
 import SettingsModal from './SettingsModal'
+
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -67,18 +68,26 @@ class PermanentDrawerLeft extends Component {
           anchor="left"
         >
           <div className={classes.toolbar} />
-          <h2
-            style={{
-              marginTop: '-48px',
-              display: 'flex',
-              justifyContent: 'center',
-              color: '#fce9ea',
-              fontFamily: 'Tahoma'
-            }}
-          >
-            Synthify
-          </h2>
-          <Divider />
+          <div className="module-border-wrap">
+            <h2
+              style={{
+                marginTop: '-48px',
+                marginLeft: '34px',
+                display: 'flex',
+                justifyContent: 'center',
+                color: '#FE6B8B',
+                fontFamily: 'Tahoma',
+                border: '1px',
+                borderRadius: '30px',
+                borderStyle: 'solid',
+                width: '150px',
+                padding: '4px',
+                boarderColor: '#FE6B8B'
+              }}
+            >
+              Synthify
+            </h2>
+          </div>
           <List>
             {this.props.names.map((name, index) =>
               this.props.playlists[name] ? (
@@ -107,19 +116,15 @@ class PermanentDrawerLeft extends Component {
                   <ListItemText
                     disableTypography
                     primary={
-                      <Typography type="body1" style={{ color: '#c9c9c9' }}>
+                      <Typography type="body1" style={{ color: '#cc9c9' }}>
                         {' '}
                         Title{' '}
                       </Typography>
                     }
-                    secondary={
-                      <Typography type="body2" style={{ color: '#a5a5a5' }}>
-                        {' '}
-                        Artist{' '}
-                      </Typography>
-                    }
+                    // secondary={<Typography type="body2" style={{ color: '#a5a5a5' }}> Artist </Typography>}
                   />
                 </ListItem>
+                <Divider />
                 {/* We are previously passing down an array of objects,
                     the first argument of map is a callback to the object in an array,
                     we need to access the property of that object, in this case its the "track"
@@ -131,10 +136,7 @@ class PermanentDrawerLeft extends Component {
                     key={index}
                     onClick={() => this.props.changeSong(index)}
                   >
-                    <ListItemText
-                      primary={song.title}
-                      secondary={song.artist}
-                    />
+                    <ListItemText primary={`${song.title} - ${song.artist}`} />
                   </ListItem>
                 ))}
               </List>

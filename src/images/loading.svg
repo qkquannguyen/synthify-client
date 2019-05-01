@@ -11,7 +11,7 @@
 			y="15"
 			ng-attr-width="{{config.width}}"
 			height="31.1848"
-			fill="#f7f7f7"
+			fill="#ff8e53"
 			x="15"
 			width="10"
 		>
@@ -31,7 +31,7 @@
 			y="15"
 			ng-attr-width="{{config.width}}"
 			height="42.7357"
-			fill="#545454"
+			fill="#fc8469"
 			x="35"
 			width="10"
 		>
@@ -51,7 +51,7 @@
 			y="15"
 			ng-attr-width="{{config.width}}"
 			height="48.4843"
-			fill="#141414"
+			fill="#fc7a77"
 			x="55"
 			width="10"
 		>
@@ -71,7 +71,7 @@
 			y="15"
 			ng-attr-width="{{config.width}}"
 			height="69.9963"
-			fill="#cdcdcd"
+			fill="#fe6b8b"
 			x="75"
 			width="10"
 		>

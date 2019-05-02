@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AppBar from './components/AppBar'
 import LoginPage from './Pages/LoginPage'
 import SignUpPage from './Pages/SignupPage'
+import SettingsPage from './Pages/SettingsPage'
 import OAuth from './Pages/OAuthPage'
 import { ThemeProvider } from '@material-ui/styles'
 import { connect } from 'react-redux'
@@ -39,72 +40,6 @@ const theme = createMuiTheme({
 })
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isOpen: false,
-      checked: [1]
-    }
-  }
-
-  handleToggle = value => () => {
-    const { checked } = this.state
-    const currentIndex = checked.indexOf(value)
-    const newChecked = [...checked]
-
-    if (currentIndex === -1) {
-      newChecked.push(value)
-    } else {
-      newChecked.splice(currentIndex, 1)
-    }
-
-    this.setState({
-      checked: newChecked
-    })
-  }
-
-  closeSettings = () => {
-    this.setState({ isOpen: false })
-  }
-
-  openSettings = () => {
-    this.setState({ isOpen: true })
-  }
-
-  renderSettings = () => {
-    if (this.state.isOpen) {
-      return (
-        <Dialog
-          open={this.state.isOpen}
-          onClose={this.closeSettings}
-          fullScreen
-        >
-          <DialogContent>
-            <DialogTitle>Settings</DialogTitle>
-            <List dense>
-              {['Some Item', 'Dark Theme', 'Other Items'].map(value => (
-                <ListItem key={value} button>
-                  <ListItemText primary={`${value}`} />
-                  <ListItemSecondaryAction>
-                    <Checkbox
-                      onChange={this.handleToggle(value)}
-                      checked={this.state.checked.indexOf(value) !== -1}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.closeSettings} color="primary">
-              <CloseIcon />
-            </Button>
-          </DialogActions>
-        </Dialog>
-      )
-    }
-  }
   render() {
     const { auth } = this.props
     const { authenicated } = auth

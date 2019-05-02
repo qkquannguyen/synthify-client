@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 
 import { AUTH_STATE_UPDATE, AUTH_ERROR } from '../actions/auth'
 import { SET_USER } from '../actions/user'
+import { SET_PLAYLISTS } from '../actions/services'
+import { SET_SETTINGS_MODAL_OPEN } from '../actions/settings'
 
 // A reducer with our basic true/false state
 export const authReducer = (
@@ -27,6 +29,17 @@ const user = {
   name: null
 }
 
+const services = {
+  names: null,
+  allPlaylists: null,
+  playlistById: {},
+  selectedPlaylist: {}
+}
+
+const settings = {
+  isModalOpen: false
+}
+
 export const userReducer = (state = user, action) => {
   switch (action.type) {
     case SET_USER:
@@ -37,12 +50,56 @@ export const userReducer = (state = user, action) => {
   }
 }
 
+export const settingsReducer = (state = settings, action) => {
+  switch (action.type) {
+    case SET_SETTINGS_MODAL_OPEN:
+      return { ...state, isModalOpen: !state.isModalOpen }
+
+    default:
+      return state
+  }
+}
+
+export const servicesReducer = (state = services, action) => {
+  switch (action.type) {
+    // all platforms
+    case SET_PLAYLISTS:
+      return {
+        ...state,
+        allPlaylists: action.playlists,
+        names: action.services
+      }
+
+    // single platform
+    case 'ADD_TRACKS':
+      let obj = { [action.id]: action.tracks }
+      return Object.assign({}, state, {
+        playlistById: Object.assign({}, state.playlistById, obj),
+        selectedPlaylist: Object.assign({}, state.selectedPlaylist, {
+          id: action.id,
+          source: action.platform
+        })
+      })
+
+    case 'SELECT_PLAYLIST':
+      return Object.assign({}, state, {
+        selectedPlaylist: {
+          id: action.id,
+          title: action.title
+        }
+      })
+
+    default:
+      return state
+  }
+}
+
 // This will allow us to split up reducers later once our application grows
 const reducers = combineReducers({
   auth: authReducer,
-  user: userReducer
-  // playlists
-  //
+  user: userReducer,
+  services: servicesReducer,
+  settings: settingsReducer
 })
 
 export default reducers

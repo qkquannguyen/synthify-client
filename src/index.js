@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 
 import reducers from './redux/reducers'
 import { updateAuth } from './redux/actions/auth'
+import { getPlaylists } from './redux/actions/services'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
@@ -24,6 +25,7 @@ if (
   // redirect accordingly
   store.dispatch(updateAuth(true))
   // fetch the profile here
+  // store.dispatch(getPlaylists())
 }
 
 ReactDOM.render(

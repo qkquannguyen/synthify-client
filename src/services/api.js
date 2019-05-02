@@ -4,10 +4,15 @@ const BASE_URL = {
 }
 
 export const apiWrapper = (url, config) => {
+  let token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+    '$1'
+  )
   const data = {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     },
     credentials: 'include'
   }
